@@ -48,15 +48,17 @@ export default function RootLayout({
               {children}
             </main>
             <footer className="w-full flex items-center justify-center py-3">
-              <Link
+              <span className="text-default-600">Powered by</span>
+              <p className="text-primary pl-2">Nostalgia</p>
+              {/* <Link
                 isExternal
                 className="flex items-center gap-1 text-current"
                 href="https://heroui.com?utm_source=next-app-template"
                 title="heroui.com homepage"
               >
                 <span className="text-default-600">Powered by</span>
-                <p className="text-primary">HeroUI</p>
-              </Link>
+                <p className="text-primary">Nostalgia</p>
+              </Link> */}
             </footer>
           </div>
         </Providers>
