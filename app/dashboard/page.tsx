@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Map from '../../components/Map';
 
 interface Memory {
@@ -7,36 +7,39 @@ interface Memory {
   latitude: number;
   longitude: number;
   title: string;
-  // Add other memory properties as needed
 }
 
 const Dashboard = () => {
-  const [memories, setMemories] = useState<Memory[]>([]);
-
-  useEffect(() => {
-    // Replace this with actual API call to your backend
-    fetchMemories();
-  }, []);
-
-  const fetchMemories = async () => {
-    try {
-      const response = await fetch('YOUR_API_ENDPOINT');
-      const data = await response.json();
-      setMemories(data);
-    } catch (error) {
-      console.error('Error fetching memories:', error);
+  // Static test data
+  const testMemories: Memory[] = [
+    {
+      id: '1',
+      latitude: 51.505,
+      longitude: -0.09,
+      title: 'London Memory'
+    },
+    {
+      id: '2',
+      latitude: 40.7128,
+      longitude: -74.0060,
+      title: 'New York Memory'
+    },
+    {
+      id: '3',
+      latitude: 35.6762,
+      longitude: 139.6503,
+      title: 'Tokyo Memory'
     }
-  };
+  ];
 
   const handlePinClick = (id: string) => {
-    // Handle pin click - show memory details
     console.log(`Memory ${id} clicked`);
   };
 
   return (
     <div className="dashboard">
       <h1>AR TimeCapsule Map</h1>
-      <Map memories={memories} onPinClick={handlePinClick} />
+      <Map memories={testMemories} onPinClick={handlePinClick} />
     </div>
   );
 };

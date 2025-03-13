@@ -10,15 +10,22 @@ export const Logo: React.FC<React.ImgHTMLAttributes<HTMLImageElement>> = ({
   const [isDark, setIsDark] = React.useState(false);
 
   React.useEffect(() => {
-    // Check if system is in dark mode
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDark(darkModeMediaQuery.matches);
+    // Initial check
+    setIsDark(document.documentElement.classList.contains('dark'));
 
-    // Listen for changes in system theme
-    const listener = (e: MediaQueryListEvent) => setIsDark(e.matches);
-    darkModeMediaQuery.addEventListener('change', listener);
+    // Create observer for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          setIsDark(document.documentElement.classList.contains('dark'));
+        }
+      });
+    });
 
-    return () => darkModeMediaQuery.removeEventListener('change', listener);
+    // Start observing
+    observer.observe(document.documentElement, { attributes: true });
+
+    return () => observer.disconnect();
   }, []);
   
   return (
